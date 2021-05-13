@@ -56,7 +56,7 @@ exports.addFeeds = (req, res) => {
                       },
                       tokens: list.map(token => token.fcmToken)
                   };
-                  sendnotification(message);
+                  sendNotification(message);
                 return res.status(200).send({ message: "Feed was added successfully!" });
             }).catch(err => {
                 res.status(500).send({ message: err.message });
