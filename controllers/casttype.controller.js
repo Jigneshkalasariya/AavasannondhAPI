@@ -6,7 +6,9 @@ const Op = db.Sequelize.Op;
 const sequelize = db.sequelize;
 
 exports.getCastTypeList = (req, res) => {
-    CastType.findAll()
+    CastType.findAll({
+        where: {isActive: true}
+    })
         .then(castTypes => {
            return  res.status(200).send({ data: castTypes });
          }).catch(err => {
