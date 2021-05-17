@@ -40,31 +40,31 @@ exports.signup = (req, res) => {
                 token: req.body.fcmToken
               };
               sendnotification(message);
-            let mailTransporter = nodemailer.createTransport({
-                service: 'Gmail',
-                auth: {
-                    user: mainconfig.GMAIL_USER,
-                    pass: mainconfig.GMAIL_PASS
-                },
-                tls: {
-                    rejectUnauthorized: false
-                }
-            });
+            // let mailTransporter = nodemailer.createTransport({
+            //     service: 'Gmail',
+            //     auth: {
+            //         user: mainconfig.GMAIL_USER,
+            //         pass: mainconfig.GMAIL_PASS
+            //     },
+            //     tls: {
+            //         rejectUnauthorized: false
+            //     }
+            // });
 
-            let mailDetails = {
-                from: mainconfig.GMAIL_USER,
-                to: user.email,
-                subject: 'Avasan Nondh: Verify PIN',
-                html: callbackUrl
-            };
+            // let mailDetails = {
+            //     from: mainconfig.GMAIL_USER,
+            //     to: user.email,
+            //     subject: 'Avasan Nondh: Verify PIN',
+            //     html: callbackUrl
+            // };
 
-            mailTransporter.sendMail(mailDetails, function (err, data) {
-                if (err) {
-                    res.status(500).send({ message: err.message });
-                } else {
-                    res.status(200).send({data: {userId: user.id} , message: 'Users was reistered and verify pin Sent Successfully on register email!' });
-                }
-            });
+            // mailTransporter.sendMail(mailDetails, function (err, data) {
+            //     if (err) {
+                 return  res.status(500).send({ message: err.message });
+            //     } else {
+            //         res.status(200).send({data: {userId: user.id} , message: 'Users was reistered and verify pin Sent Successfully on register email!' });
+            //     }
+            // });
         })
         .catch(err => {
             res.status(500).send({ message: err.message });
