@@ -5,12 +5,17 @@ const feeds = db.feeds;
 const sequelize = db.sequelize;
 const Op = db.Sequelize.Op;
 var admin = require("firebase-admin");
+var APIUrl = "http://avasannondhapp-env.eba-tmshrqpm.us-east-2.elasticbeanstalk.com"
 
 exports.searchFeeds = (req, res) => {
     //Search Product to Database
     sequelize.query("Call sproc_searchFeed (:search, :startDate, :endDate, :pageNumber, :pageSize, :searchUserId)", { replacements: { search: req.body.search, startDate: req.body.startDate, endDate:req.body.endDate, pageNumber: req.body.pageNumber, pageSize: req.body.pageSize, searchUserId: req.userId }, type: sequelize.QueryTypes.SELECT })
         .then(feeds => {
-            res.status(200).send({ data: feeds });
+            let feedList = Object.values(feeds[1]);
+            feedList.forEach(el => {
+                el.image = `${APIUrl}/${el.pictureName}`;
+            });
+            res.status(200).send({ data: {total: feeds[0][0], list:feedList}});
         })
         .catch(err => {
             res.status(500).send({ message: err.message });
