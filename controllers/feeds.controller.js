@@ -5,7 +5,7 @@ const feeds = db.feeds;
 const sequelize = db.sequelize;
 const Op = db.Sequelize.Op;
 var admin = require("firebase-admin");
-var APIUrl = "http://avasannondhapp-env.eba-tmshrqpm.us-east-2.elasticbeanstalk.com"
+var APIUrl = "http://avasannondhapp-env.eba-tmshrqpm.us-east-2.elasticbeanstalk.com/images"
 
 exports.searchFeeds = (req, res) => {
     //Search Product to Database
